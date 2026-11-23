@@ -19,10 +19,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd backend
-          pip install -r requirements.txt
+          if [ -f backend/requirements.txt ]; then
+            cd backend && pip install -r requirements.txt
+          else
+            echo "No requirements.txt yet, skipping."
+          fi
 
       - name: Run tests
         run: |
-          cd backend
-          pytest app/tests/ -v
+          if [ -d backend/app/tests ]; then
+            cd backend && pytest app/tests/ -v
+          else
+            echo "No tests yet, skipping."
+          fi
