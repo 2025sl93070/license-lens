@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FileUpload from './components/FileUpload';
 import Results from './components/Results';
+import DependencyGraph from './components/DependencyGraph';
 import './App.css';
  
 function App() {
@@ -19,7 +20,12 @@ function App() {
       />
       {loading && <p>Analyzing dependencies...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {results && <Results data={results} />}
+      {results && (
+<>
+<Results data={results} />
+<DependencyGraph data={results} />
+</>
+      )}
 </div>
   );
 }
