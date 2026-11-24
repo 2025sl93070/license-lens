@@ -8,13 +8,28 @@ const statusColors = {
 };
  
 function Results({ data }) {
+  const handleDownload = () => {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `licenselens-report.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+ 
   return (
 <div>
 <h2>Analysis Results</h2>
 <p>File: {data.filename}</p>
 <p>Total Dependencies: {data.total_dependencies}</p>
  
-      <table border="1" cellPadding="8" style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <button onClick={handleDownload}>
+        Download Report (JSON)
+</button>
+ 
+      <table border="1" cellPadding="8" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
 <thead>
 <tr>
 <th>Package</th>
@@ -49,4 +64,3 @@ function Results({ data }) {
 }
  
 export default Results;
- 
