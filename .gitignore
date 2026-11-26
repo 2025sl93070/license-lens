@@ -1,3 +1,10 @@
 .env
 __pycache__/
 *.pyc
+node_modules/
+.venv/
+venv/
+*.db
+backend/venv/
+build/
+dist/
