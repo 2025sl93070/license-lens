@@ -27,7 +27,7 @@ Thank you for your interest in contributing to LicenseLens.
 ## Code Style
 
 - Python: follow PEP 8
-- JavaScript/React: follow standard ESLint rules
+- TypeScript/React: follow standard ESLint rules
 
 ## Issue Reporting
 
