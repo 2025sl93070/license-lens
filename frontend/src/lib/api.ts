@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { AnalysisResult, CompareResult, Policy } from '../types';
 
-const api = axios.create({ baseURL: '/api' });
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+const api = axios.create({ baseURL: `${BACKEND_URL}/api` });
 
 export async function runDemo(policyId = 'enterprise-safe'): Promise<AnalysisResult> {
   const { data } = await api.post('/analyze/demo', { policyId });
@@ -52,5 +53,6 @@ export async function getPolicies(): Promise<Policy[]> {
 }
 
 export function getExportCsvUrl(id: string): string {
-  return `/api/analyze/${id}/export/csv`;
+  const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+  return `${BACKEND_URL}/api/analyze/${id}/export/csv`;
 }
