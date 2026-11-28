@@ -1,16 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { LicenseInfo } from '../types';
 import RiskBadge from '../components/RiskBadge';
 import { BookOpen, ExternalLink, CheckCircle, XCircle } from 'lucide-react';
+import { getLicenses } from '../lib/api';
 
 export default function LicenseGlossaryPage() {
   const { data: licenses = [], isLoading } = useQuery<LicenseInfo[]>({
     queryKey: ['licenses'],
-    queryFn: async () => {
-      const { data } = await axios.get('/api/licenses');
-      return data;
-    },
+    queryFn: getLicenses,
   });
 
   const byCategory = licenses.reduce((acc, l) => {

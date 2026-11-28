@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AnalysisResult, CompareResult, Policy } from '../types';
+import { AnalysisResult, CompareResult, Policy, LicenseInfo } from '../types';
 
 const BACKEND_URL = import.meta.env.VITE_API_URL || '';
 const api = axios.create({ baseURL: `${BACKEND_URL}/api` });
@@ -49,6 +49,11 @@ export async function getHistory(): Promise<Omit<AnalysisResult, 'dependencies'>
 
 export async function getPolicies(): Promise<Policy[]> {
   const { data } = await api.get('/policies');
+  return data;
+}
+
+export async function getLicenses(): Promise<LicenseInfo[]> {
+  const { data } = await api.get('/licenses');
   return data;
 }
 
